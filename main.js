@@ -7,10 +7,10 @@ fileInput.addEventListener('change', event => {
     const reader = new FileReader();
 
     reader.readAsDataURL(event.target.files[0]);
-    reader.onload = event => {
+    reader.onloadend = event => {
         const img = new Image();
-        img.src = event.target.result;
 
+        img.src = event.target.result;
         img.onload = () => {
             const elem = document.createElement('canvas');
             elem.width = width;
@@ -19,7 +19,5 @@ fileInput.addEventListener('change', event => {
             ctx.drawImage(img, 0, 0, width, height);
             imageBox.innerHTML = `<img src="${elem.toDataURL('image/jpeg')}" />`;
         };
-
-        reader.onerror = error => console.log(error);
     };
 });
